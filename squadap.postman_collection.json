@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "4cb52abd-03bd-4219-a338-8c5c9e22af5b",
+		"name": "Squadap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "736780"
+	},
+	"item": [
+		{
+			"name": "Get Single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//status code",
+							"pm.test(\"status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//header present",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"    pm.response.to.have.header(\"Content-Type\")",
+							"});",
+							"",
+							"//Type Header",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8')",
+							"});",
+							"",
+							"//respon time",
+							"pm.test(\"Response time is less than 50ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"//type data",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"Test Data type of the response\", () =>{",
+							"    pm.expect(jsonData.userId).to.be.a(\"number\");",
+							"    pm.expect(jsonData.id).to.be.a(\"number\");",
+							"    pm.expect(jsonData.title).to.be.a(\"string\");",
+							"    pm.expect(jsonData.body).to.be.a(\"string\");",
+							"});",
+							"",
+							"//json schema validation",
+							"var schema={",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"userId\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"title\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"body\": {",
+							"      \"type\": \"string\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"userId\",",
+							"    \"id\",",
+							"    \"title\",",
+							"    \"body\"",
+							"  ]",
+							"}",
+							"pm.test('schema is valid', function(){",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/2",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//status code",
+							"pm.test(\"status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//header present",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"    pm.response.to.have.header(\"Content-Type\")",
+							"});",
+							"",
+							"//Type Header",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8')",
+							"});",
+							"",
+							"//respon time",
+							"pm.test(\"Response time is less than 50ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"//type data",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"Test Data type of the response\", () =>{",
+							"    pm.expect(jsonData.userId).to.be.a(\"number\");",
+							"    pm.expect(jsonData.id).to.be.a(\"number\");",
+							"    pm.expect(jsonData.title).to.be.a(\"string\");",
+							"});",
+							"",
+							"//json schema validation",
+							"var schema={",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"userId\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"title\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"body\": {",
+							"      \"type\": \"string\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"userId\",",
+							"    \"id\",",
+							"    \"title\",",
+							"    \"body\"",
+							"  ]",
+							"}",
+							"pm.test('schema is valid', function(){",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/2",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Match Payload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 800ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"pm.test(\"Payload is Match\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"recommendation\");",
+							"    pm.expect(pm.response.text()).to.include(\"motorcycle\");",
+							"    pm.expect(pm.response.text()).to.include(\"12\");",
+							"});",
+							"",
+							"pm.test(\"Json Value Check Successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.value).to.eql();",
+							"});",
+							"",
+							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+							"    console.log(response.json());",
+							"});",
+							"",
+							"pm.test(\"environment to be production\", function () {",
+							"    pm.expect(pm.environment.get(\"env\")).to.equal();",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.nested;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"recommendation\",\n    \"body\": \"motorcycle\",\n    \"userId\": 12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?title=recommendation&body=motorcycle&userid=11",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "recommendation"
+						},
+						{
+							"key": "body",
+							"value": "motorcycle"
+						},
+						{
+							"key": "userid",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
